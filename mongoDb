@@ -1,22 +1,46 @@
-use SuperMarketDb
+# Load mongolite package
+library(mongolite)
 
-db.createCollection("ProductTable")
-
-db.ProductTable.insertOne({
-ProductId:101,
-ProductName:"Core i3",
-Price:11000
-})
-
-db.ProductTable.find()
-
-db.ProductTable.updateOne(
-{ProductId:101},
-{$set:{Price:15000}}
+# Create MongoDB connection
+con <- mongo(
+  collection = "student",
+  db = "college",
+  url = "mongodb://localhost"
 )
 
-db.ProductTable.deleteOne(
-{ProductId:101}
+print("Connected to MongoDB")
+
+# Create student data
+student_data <- data.frame(
+  RollNo = c(101,102,103),
+  Name = c("Arun","Priya","Kavin"),
+  Department = c("CSE","IT","ECE"),
+  Marks = c(85,90,88)
 )
 
-db.ProductTable.drop()
+# Insert data into MongoDB
+con$insert(student_data)
+
+print("Inserted Data")
+
+# Display all records
+print(con$find())
+
+# Search specific record
+print(con$find('{"RollNo":102}'))
+
+# Update record
+con$update(
+ '{"RollNo":101}',
+ '{"$set":{"Marks":95}}'
+)
+
+print("Updated Record")
+
+# Delete record
+con$remove('{"RollNo":103}')
+
+print("Deleted Record")
+
+# Display final records
+print(con$find())
