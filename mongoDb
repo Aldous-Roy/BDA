@@ -1,0 +1,22 @@
+use SuperMarketDb
+
+db.createCollection("ProductTable")
+
+db.ProductTable.insertOne({
+ProductId:101,
+ProductName:"Core i3",
+Price:11000
+})
+
+db.ProductTable.find()
+
+db.ProductTable.updateOne(
+{ProductId:101},
+{$set:{Price:15000}}
+)
+
+db.ProductTable.deleteOne(
+{ProductId:101}
+)
+
+db.ProductTable.drop()
