@@ -1,15 +1,183 @@
-lines = LOAD 'input.txt'
-AS (line:chararray);
+# Install Apache Pig on Ubuntu
 
-words = FOREACH lines
-GENERATE
-FLATTEN(TOKENIZE(line))
-as word;
+## Step 1 — Install Java
 
-grouped = GROUP words BY word;
+Pig requires Java.
 
-wordcount = FOREACH grouped
-GENERATE group,
-COUNT(words);
+Check Java:
 
-DUMP wordcount;
+```bash id="p1"
+java -version
+```
+
+If not installed:
+
+```bash id="p2"
+sudo apt update
+sudo apt install openjdk-11-jdk -y
+```
+
+---
+
+# Step 2 — Download Apache Pig
+
+Move to Downloads:
+
+```bash id="p3"
+cd ~/Downloads
+```
+
+Download Pig:
+
+```bash id="p4"
+wget https://downloads.apache.org/pig/pig-0.17.0/pig-0.17.0.tar.gz
+```
+
+---
+
+# Step 3 — Extract Pig
+
+```bash id="p5"
+tar -xvzf pig-0.17.0.tar.gz
+```
+
+Move to `/usr/local`:
+
+```bash id="p6"
+sudo mv pig-0.17.0 /usr/local/pig
+```
+
+---
+
+# Step 4 — Configure Environment Variables
+
+Open `.bashrc`:
+
+```bash id="p7"
+nano ~/.bashrc
+```
+
+Add these lines at bottom:
+
+```bash id="p8"
+export PIG_HOME=/usr/local/pig
+export PATH=$PATH:$PIG_HOME/bin
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+```
+
+Save:
+
+* CTRL + O
+* Enter
+* CTRL + X
+
+Apply changes:
+
+```bash id="p9"
+source ~/.bashrc
+```
+
+---
+
+# Step 5 — Verify Pig Installation
+
+Check version:
+
+```bash id="p10"
+pig -version
+```
+
+You should see:
+
+```text id="p11"
+Apache Pig version 0.17.0
+```
+
+---
+
+# Step 6 — Start Pig
+
+Run:
+
+```bash id="p12"
+pig
+```
+
+Pig shell opens:
+
+```text id="p13"
+grunt>
+```
+
+---
+
+# Step 7 — Simple Pig Example
+
+Create sample file:
+
+```bash id="p14"
+nano data.txt
+```
+
+Add:
+
+```text id="p15"
+1 Arun 85
+2 Priya 90
+3 Kavin 88
+```
+
+Save and exit.
+
+---
+
+# Load File in Pig
+
+Inside Pig shell:
+
+```pig id="p16"
+A = LOAD 'data.txt' USING PigStorage(' ') 
+AS (id:int,name:chararray,marks:int);
+```
+
+Display data:
+
+```pig id="p17"
+DUMP A;
+```
+
+---
+
+# Important Commands
+
+| Command        | Purpose       |
+| -------------- | ------------- |
+| `pig`          | Start Pig     |
+| `pig -version` | Check version |
+| `grunt>`       | Pig shell     |
+| `DUMP`         | Display data  |
+| `LOAD`         | Load file     |
+
+---
+
+# Easy Memory Trick
+
+```text id="p18"
+JAVA → DOWNLOAD → EXTRACT → PATH → PIG
+```
+
+---
+
+# Download URL Memory Trick
+
+Remember:
+
+```text id="p19"
+apache → pig → version twice
+```
+
+Example:
+
+```text id="p20"
+pig-0.17.0/pig-0.17.0.tar.gz
+```
