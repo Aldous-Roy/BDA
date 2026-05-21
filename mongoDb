@@ -1,16 +1,13 @@
-# Load mongolite package
+install.packages("mongolite")
+
 library(mongolite)
 
-# Create MongoDB connection
 con <- mongo(
   collection = "student",
   db = "college",
   url = "mongodb://localhost"
 )
 
-print("Connected to MongoDB")
-
-# Create student data
 student_data <- data.frame(
   RollNo = c(101,102,103),
   Name = c("Arun","Priya","Kavin"),
@@ -18,29 +15,17 @@ student_data <- data.frame(
   Marks = c(85,90,88)
 )
 
-# Insert data into MongoDB
 con$insert(student_data)
 
-print("Inserted Data")
-
-# Display all records
 print(con$find())
 
-# Search specific record
 print(con$find('{"RollNo":102}'))
 
-# Update record
 con$update(
  '{"RollNo":101}',
  '{"$set":{"Marks":95}}'
 )
 
-print("Updated Record")
-
-# Delete record
 con$remove('{"RollNo":103}')
 
-print("Deleted Record")
-
-# Display final records
 print(con$find())
