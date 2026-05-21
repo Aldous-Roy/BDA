@@ -60,9 +60,9 @@ nano ~/.bashrc
 Add these lines at bottom:
 
 ```bash id="p8"
+export JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64
 export PIG_HOME=/usr/local/pig
 export PATH=$PATH:$PIG_HOME/bin
-export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 ```
 
 Save:
