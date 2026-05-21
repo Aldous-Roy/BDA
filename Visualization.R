@@ -1,28 +1,27 @@
-# Install ggplot2 package
+# Install package (run only once)
 install.packages("ggplot2")
 
-# Load ggplot2 package
+# Load library
 library(ggplot2)
 
-# Load iris dataset
+# Load dataset
 data(iris)
 
-# Scatter Plot
-qplot(Sepal.Length,
-      Petal.Length,
-      data = iris)
+# 1. Scatter Plot
+qplot(Sepal.Length, Petal.Length, data = iris)
 
-# Scatter Plot with color
-qplot(Sepal.Length,
-      Petal.Length,
-      data = iris,
-      color = Species)
+# 2. Histogram
+hist(iris $Sepal.Length)
 
-# Histogram
-hist(iris$Sepal.Length)
+# 3. Bar Plot
+qplot(Species, data = iris)
 
-# Scatter Plot Matrix
-pairs(iris)
+# 4. Box Plot
+qplot(Species, Sepal.Length, data = iris, geom = "boxplot")
 
-# Density Plot
-plot(density(iris$Sepal.Length))
+# 5. Line Plot
+qplot(1:nrow(iris), Sepal.Length, data = iris, geom = "line")
+
+# 6. Density Plot
+qplot(Sepal.Length, data = iris, geom = "density")
+
