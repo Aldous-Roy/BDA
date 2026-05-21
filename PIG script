@@ -1,127 +1,133 @@
-# Install Apache Pig on Ubuntu
+# Apache Pig Installation on Ubuntu
 
-## Step 1 — Install Java
-
-Pig requires Java.
+## Step 1 — Install Java 11
 
 Check Java:
 
-```bash id="p1"
+```bash
 java -version
 ```
 
-If not installed:
+Install Java 11:
 
-```bash id="p2"
+```bash
 sudo apt update
 sudo apt install openjdk-11-jdk -y
 ```
 
+Set Java 11:
+
+```bash
+sudo update-alternatives --config java
+```
+
+Choose Java 11 option.
+
+Verify:
+
+```bash
+java -version
+```
+
 ---
 
-# Step 2 — Download Apache Pig
+## Step 2 — Download Apache Pig
 
 Move to Downloads:
 
-```bash id="p3"
+```bash
 cd ~/Downloads
 ```
 
 Download Pig:
 
-```bash id="p4"
-wget https://downloads.apache.org/pig/pig-0.17.0/pig-0.17.0.tar.gz
+```bash
+wget https://archive.apache.org/dist/pig/pig-0.17.0/pig-0.17.0.tar.gz
 ```
 
 ---
 
-# Step 3 — Extract Pig
+## Step 3 — Extract Pig
 
-```bash id="p5"
+Extract:
+
+```bash
 tar -xvzf pig-0.17.0.tar.gz
 ```
 
 Move to `/usr/local`:
 
-```bash id="p6"
+```bash
 sudo mv pig-0.17.0 /usr/local/pig
 ```
 
 ---
 
-# Step 4 — Configure Environment Variables
+## Step 4 — Configure Environment Variables
 
 Open `.bashrc`:
 
-```bash id="p7"
+```bash
 nano ~/.bashrc
 ```
 
 Add these lines at bottom:
 
-```bash id="p8"
-export JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64
+```bash
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 export PIG_HOME=/usr/local/pig
-export PATH=$PATH:$PIG_HOME/bin
+export HADOOP_HOME=/usr/local/hadoop
+export PATH=$PATH:$PIG_HOME/bin:$HADOOP_HOME/bin
 ```
 
 Save:
-
-* CTRL + O
-* Enter
-* CTRL + X
+- CTRL + O
+- Enter
+- CTRL + X
 
 Apply changes:
 
-```bash id="p9"
+```bash
 source ~/.bashrc
 ```
 
 ---
 
-# Step 5 — Verify Pig Installation
+## Step 5 — Verify Pig Installation
 
 Check version:
 
-```bash id="p10"
+```bash
 pig -version
-```
-
-You should see:
-
-```text id="p11"
-Apache Pig version 0.17.0
 ```
 
 ---
 
-# Step 6 — Start Pig
+## Step 6 — Start Pig in Local Mode
 
-Run:
-
-```bash id="p12"
-pig
+```bash
+pig -x local
 ```
 
 Pig shell opens:
 
-```text id="p13"
+```text
 grunt>
 ```
 
 ---
 
-# Step 7 — Simple Pig Example
+## Step 7 — Create Sample File
 
-Create sample file:
+Create file:
 
-```bash id="p14"
+```bash
 nano data.txt
 ```
 
 Add:
 
-```text id="p15"
+```text
 1 Arun 85
 2 Priya 90
 3 Kavin 88
@@ -131,53 +137,34 @@ Save and exit.
 
 ---
 
-# Load File in Pig
+## Step 8 — Load File in Pig
 
 Inside Pig shell:
 
-```pig id="p16"
-A = LOAD 'data.txt' USING PigStorage(' ') 
+```pig
+A = LOAD 'data.txt' USING PigStorage(' ')
 AS (id:int,name:chararray,marks:int);
 ```
 
 Display data:
 
-```pig id="p17"
+```pig
 DUMP A;
 ```
 
 ---
 
-# Important Commands
+## Important Commands
 
-| Command        | Purpose       |
-| -------------- | ------------- |
-| `pig`          | Start Pig     |
-| `pig -version` | Check version |
-| `grunt>`       | Pig shell     |
-| `DUMP`         | Display data  |
-| `LOAD`         | Load file     |
-
----
-
-# Easy Memory Trick
-
-```text id="p18"
-JAVA → DOWNLOAD → EXTRACT → PATH → PIG
-```
+| Command | Purpose |
+|---|---|
+| `pig -version` | Check Pig version |
+| `pig -x local` | Start Pig in local mode |
+| `LOAD` | Load file |
+| `DUMP` | Display data |
 
 ---
 
-# Download URL Memory Trick
+## Result
 
-Remember:
-
-```text id="p19"
-apache → pig → version twice
-```
-
-Example:
-
-```text id="p20"
-pig-0.17.0/pig-0.17.0.tar.gz
-```
+Apache Pig was successfully installed and executed on Ubuntu Linux.
