@@ -1,0 +1,167 @@
+Remember Hadoop installation like this:
+
+# Hadoop = 5 Main Things
+
+## 1. Install Java
+
+```bash id="s1"
+sudo apt update
+sudo apt install openjdk-11-jdk -y
+```
+
+Check:
+
+```bash id="s2"
+java -version
+```
+
+---
+
+# 2. Download Hadoop
+
+```bash id="s3"
+cd ~/Downloads
+wget https://downloads.apache.org/hadoop/common/hadoop-3.4.2/hadoop-3.4.2.tar.gz
+```
+
+Extract:
+
+```bash id="s4"
+tar -xvzf hadoop-3.4.2.tar.gz
+```
+
+Move:
+
+```bash id="s5"
+sudo mv hadoop-3.4.2 /usr/local/hadoop
+```
+
+---
+
+# 3. Set Hadoop Path
+
+Open:
+
+```bash id="s6"
+nano ~/.bashrc
+```
+
+Paste at bottom:
+
+```bash id="s7"
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+export HADOOP_HOME=/usr/local/hadoop
+export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+```
+
+Apply:
+
+```bash id="s8"
+source ~/.bashrc
+```
+
+---
+
+# 4. Setup SSH
+
+Install:
+
+```bash id="s9"
+sudo apt install openssh-server -y
+```
+
+Generate key:
+
+```bash id="s10"
+ssh-keygen -t rsa -P ""
+```
+
+Enable passwordless login:
+
+```bash id="s11"
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+```
+
+Test:
+
+```bash id="s12"
+ssh localhost
+```
+
+---
+
+# 5. Start Hadoop
+
+Format:
+
+```bash id="s13"
+hdfs namenode -format
+```
+
+Start:
+
+```bash id="s14"
+start-dfs.sh
+```
+
+Check:
+
+```bash id="s15"
+jps
+```
+
+If you see:
+
+```text id="s16"
+NameNode
+DataNode
+SecondaryNameNode
+```
+
+DONE ✅
+
+---
+
+# Super Easy Memory Trick
+
+Remember:
+
+```text id="s17"
+JAVA
+DOWNLOAD
+PATH
+SSH
+START
+```
+
+or
+
+```text id="s18"
+J D P S S
+```
+
+---
+
+# Most Important Commands Only
+
+If exam/lab:
+
+```bash id="s19"
+java -version
+hadoop version
+hdfs namenode -format
+start-dfs.sh
+jps
+```
+
+---
+
+# Hadoop Website
+
+Open:
+
+```text id="s20"
+http://localhost:9870
+```
+
+If page opens → Hadoop working ✅
