@@ -51,3 +51,21 @@ Hello Apache Spark
     }
 }
 
+
+import org.apache.spark.sql.SparkSession;
+
+public class SimpleSpark {
+    public static void main(String[] args) {
+
+        SparkSession spark = SparkSession
+                .builder()
+                .appName("Simple Spark App")
+                .master("local")
+                .getOrCreate();
+
+        System.out.println("Hello Apache Spark");
+
+        spark.stop();
+    }
+}
+
