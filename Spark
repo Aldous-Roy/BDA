@@ -69,3 +69,56 @@ public class SimpleSpark {
     }
 }
 
+
+
+Yes. After `spark-shell` opens, you will see:
+
+```scala
+scala>
+```
+
+Now type simple Scala commands like these:
+
+```scala id="b2m8pd"
+println("Hello Apache Spark")
+```
+
+Output:
+
+```scala id="e5q2rm"
+Hello Apache Spark
+```
+
+Or simple addition:
+
+```scala id="h8v5tx"
+10 + 20
+```
+
+Output:
+
+```scala id="k1x9la"
+30
+```
+
+Or a tiny Spark example:
+
+```scala id="n4n3cb"
+val data = List(1,2,3,4,5)
+```
+
+```scala id="q7r6wp"
+data.sum
+```
+
+Output:
+
+```scala id="t9u1ye"
+15
+```
+
+To exit Spark shell:
+
+```scala id="w3p8kd"
+:quit
+```
