@@ -6,7 +6,7 @@ sudo apt install openjdk-11-jdk -y
 java -version
 
 # DOWNLOAD SPARK
-wget https://downloads.apache.org/spark/spark-3.5.1/spark-3.5.1-bin-hadoop3.tgz
+wget https://archive.apache.org/dist/spark/spark-3.5.1/spark-3.5.1-bin-hadoop3.tgz
 
 # EXTRACT SPARK
 tar -xvzf spark-3.5.1-bin-hadoop3.tgz
