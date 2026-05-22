@@ -1,0 +1,53 @@
+# INSTALL JAVA
+sudo apt update
+sudo apt install openjdk-11-jdk -y
+
+# CHECK JAVA
+java -version
+
+# DOWNLOAD SPARK
+wget https://downloads.apache.org/spark/spark-3.5.1/spark-3.5.1-bin-hadoop3.tgz
+
+# EXTRACT SPARK
+tar -xvzf spark-3.5.1-bin-hadoop3.tgz
+
+# MOVE SPARK
+sudo mv spark-3.5.1-bin-hadoop3 /usr/local/spark
+
+# SET SPARK PATH
+echo 'export SPARK_HOME=/usr/local/spark' >> ~/.bashrc
+echo 'export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin' >> ~/.bashrc
+
+# RELOAD
+source ~/.bashrc
+
+# CHECK SPARK
+spark-shell
+
+#exit the shell
+exit
+
+nano HelloSpark.java
+
+public class HelloSpark {
+    public static void main(String[] args) {
+        System.out.println("Hello Apache Spark");Save:
+
+CTRL + O
+Enter
+CTRL + X
+
+Compile program:
+
+javac HelloSpark.java
+
+Run program:
+
+java HelloSpark
+
+Expected Output:
+
+Hello Apache Spark
+    }
+}
+
